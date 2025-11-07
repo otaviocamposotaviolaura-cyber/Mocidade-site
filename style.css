@@ -1,130 +1,102 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Grupo de Mocidade CCB</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="overlay"></div>
-
-  <header class="top">
-    <h1>Bem-vindo ao Grupo de Mocidade 🎻</h1>
-    <p>Apresente-se em oração quando quiser — seja bem-vindo!</p>
-  </header>
-
-  <main class="conteudo">
-    <section class="card captcha-card">
-      <h2>Proteção de Acesso</h2>
-      <p>Marque a caixinha para liberar os links.</p>
-
-      <label class="checkbox-label">
-        <input type="checkbox" id="captchaCheck"> <span>Não sou um robô</span>
-      </label>
-
-      <div class="actions">
-        <button id="verifyBtn" class="btn" disabled>Verificar</button>
-        <span id="status" class="status"></span>
-      </div>
-
-      <p id="msg" class="msg"></p>
-    </section>
-
-    <section class="card links-card">
-      <h2>Links</h2>
-      <div class="links">
-        <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
-        <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
-        <button id="openChannelBtn" class="link-btn" disabled>Canal WhatsApp</button>
-        <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
-      </div>
-    </section>
-
-    <section class="card info-card">
-      <h2>Regras Rápidas</h2>
-      <ul>
-        <li>Proibido entrar com intenções de relacionamento.</li>
-        <li>Sem vendas, anúncios, ofensas ou brigas.</li>
-        <li>Apresentação em oração é recomendada.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="bottom">
-    <p>© Grupo de Mocidade CCB</p>
-  </footer>
-
-<script>
-/* Links codificados em Base64 (mantidos apenas no JS) */
-const encodedLinks = {
-  group:  "aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9Ja3pLcmZjY0tpY0Zkb2d5bVQ5UkdGP21vZGU9d3d0",
-  insta:  "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb2NpZGFkZWNjYjIwMjU=",
-  channel:"aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmF4Zzh1Z0VnR2ZTUzBrR0N3M08=",
-  hinos:  "aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmIyQXJIN0daTkNsVEpjZkR3MU4="
-};
-
-/* Elementos */
-const captchaCheck = document.getElementById('captchaCheck');
-const verifyBtn = document.getElementById('verifyBtn');
-const status = document.getElementById('status');
-const msg = document.getElementById('msg');
-
-const openGroupBtn = document.getElementById('openGroupBtn');
-const openInstaBtn = document.getElementById('openInstaBtn');
-const openChannelBtn = document.getElementById('openChannelBtn');
-const openHinosBtn = document.getElementById('openHinosBtn');
-
-/* Habilita botão Verificar com checkbox */
-captchaCheck.addEventListener('change', () => {
-  verifyBtn.disabled = !captchaCheck.checked;
-  status.textContent = captchaCheck.checked ? 'Pronto' : '';
-  msg.textContent = '';
-});
-
-/* Simula verificação e libera os botões */
-verifyBtn.addEventListener('click', () => {
-  if(!captchaCheck.checked){
-    status.textContent = '';
-    msg.textContent = 'Marque a caixa antes de verificar.';
-    return;
-  }
-  status.textContent = 'Verificando...';
-  verifyBtn.disabled = true;
-  setTimeout(() => {
-    status.textContent = 'Verificado ✅';
-    msg.textContent = 'Links liberados. Clique para abrir.';
-    [openGroupBtn, openInstaBtn, openChannelBtn, openHinosBtn].forEach(b => b.disabled = false);
-  }, 600);
-});
-
-/* Função utilitária */
-function decodeAndOpen(encoded){
-  if(!captchaCheck.checked){
-    msg.textContent = 'Marque o captcha antes.';
-    return;
-  }
-  try {
-    const url = atob(encoded);
-    window.open(url, '_blank', 'noopener,noreferrer');
-  } catch(e){
-    console.error('Erro ao abrir link:', e);
-    alert('Erro ao abrir o link. Veja console.');
-  }
-}
-
-/* Eventos dos botões */
-openGroupBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.group));
-openInstaBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.insta));
-openChannelBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.channel));
-openHinosBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.hinos));
-</script>
-</body>
-</html>
-body{
+/* ===== Fundo de instrumentos ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
   background-image: url("https://cdn.pixabay.com/photo/2020/01/06/18/03/violin-4746461_1280.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  color: #fff;
-    }
+  color: #ffffff;
+}
+
+/* Overlay azul escuro */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 20, 60, 0.75);
+  z-index: 0;
+}
+
+/* CENTRALIZAÇÃO */
+main, header, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Títulos */
+h1, h2 {
+  text-align: center;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  color: #a7c9ff;
+}
+
+p, li {
+  color: #e5eeff;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: rgba(0, 40, 100, 0.55);
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  max-width: 480px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== CAPTCHA ===== */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1.1em;
+}
+
+#verifyBtn {
+  background: #4d8cff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+#verifyBtn:disabled {
+  background: #6b6b6b;
+}
+
+/* ===== Botões de Links ===== */
+.link-btn {
+  background: #1a4bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.link-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Rodapé */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #d0ddff;
+                             }
