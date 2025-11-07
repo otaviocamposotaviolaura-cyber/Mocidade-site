@@ -26,5 +26,80 @@
     <p><a href="https://www.instagram.com/mocidadeccb2025">Instagram</a></p>
     <p><a href="https://whatsapp.com/channel/0029Vaxg8ugEgGfSS0kGCw3O">Canal no WhatsApp</a></p>
     <p><a href="https://whatsapp.com/channel/0029Vb2ArH7GZNClTJcfDw1N">Hinos</a></p>
+
+    <!-- === CAPTCHA simples === -->
+    <div class="captcha-container">
+      <p>Marque a caixinha para continuar:</p>
+      <label>
+        <input type="checkbox" id="captchaCheck"> Não sou um robô
+      </label>
+      <br><br>
+      <button id="submitBtn" disabled>Enviar</button>
+      <p id="message">Marque a caixinha antes de enviar!</p>
+    </div>
+
+    <!-- JavaScript do CAPTCHA -->
+    <script>
+    const check = document.getElementById('captchaCheck');
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('message');
+
+    check.addEventListener('change', () => {
+      btn.disabled = !check.checked;
+      msg.style.display = 'none';
+    });
+
+    btn.addEventListener('click', () => {
+      if (!check.checked) {
+        msg.style.display = 'block';
+      } else {
+        alert('Formulário enviado com sucesso! ✅');
+        // Aqui você pode colocar a ação do botão, tipo redirecionar ou enviar dados
+      }
+    });
+    </script>
+
+    <!-- CSS do CAPTCHA adaptado -->
+    <style>
+    .captcha-container {
+      border: 2px solid #fff;
+      padding: 20px;
+      width: 300px;
+      border-radius: 15px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      margin: 30px auto;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .captcha-container p {
+      margin: 10px 0;
+      font-size: 1em;
+    }
+
+    #submitBtn {
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #submitBtn:disabled {
+      background-color: #777;
+      cursor: not-allowed;
+    }
+
+    #message {
+      color: #ff5555;
+      display: none;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+    </style>
 </body>
         </html>
