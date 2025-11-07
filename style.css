@@ -121,3 +121,10 @@ openHinosBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.hinos));
 </script>
 </body>
 </html>
+body{
+  background-image: url("https://cdn.pixabay.com/photo/2020/01/06/18/03/violin-4746461_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
+    }
