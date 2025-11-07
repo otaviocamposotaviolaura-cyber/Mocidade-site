@@ -1,105 +1,150 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grupo de Mocidade CCB</title>
-
-    <!-- 🌈 Liga o arquivo CSS -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grupo de Mocidade CCB</title>
+  <style>
+    body{font-family: 'Poppins', Arial, sans-serif; background: linear-gradient(180deg,#0b1220,#0f1724); color:#fff; margin:0; padding:24px}
+    .container{max-width:900px;margin:0 auto;background:rgba(255,255,255,0.03);padding:24px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    h1{font-size:2rem;margin-top:0}
+    a{color:#7cc7ff;text-decoration:underline}
+    .rules p{margin:6px 0}
+    .links{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .link-btn{padding:10px 14px;border-radius:8px;border:none;background:#1e90ff;color:#fff;cursor:pointer;font-weight:600}
+    .link-btn[disabled]{background:#444;cursor:not-allowed;opacity:0.9}
+    .captcha-box{max-width:360px;margin:20px 0;padding:18px;border-radius:12px;background:rgba(255,255,255,0.03);text-align:center}
+    #msg{color:#ffd27a;margin-top:10px;font-size:0.95rem}
+    footer{margin-top:18px;font-size:0.9rem;color:#cfd8e3a3}
+    hr{border:none;border-top:1px solid rgba(255,255,255,0.04);margin:16px 0}
+    /* Mobile tweaks */
+    @media (max-width:480px){.links{flex-direction:column}}
+  </style>
 </head>
 <body>
+  <div class="container">
     <h1>Bem-vindo ao Grupo de Mocidade</h1>
     <p>📖 Bem-vindo(a)! 🙌</p>
     <p>✨ Aqui a única coisa indispensável é apresentar todos em oração. Vamos sempre lembrar uns dos outros diante de Deus!</p>
     <p>🤲 A apresentação é opcional, sinta-se à vontade para compartilhar sobre você quando quiser.</p>
 
     <h2>Regras</h2>
-    <p>🚫 Proibido entrar com intenções de relacionamento.</p>
-    <p>🚫 Mensagens anônimas não são permitidas neste grupo.</p>
-    <p>🚫 Sem vendas, anúncios, brigas, discussões ou palavras ofensivas.</p>
-
-    <h2>Link do Grupo</h2>
-    <a href="https://chat.whatsapp.com/IkzKrfccKicFdogymT9RGF?mode=wwt">Entrar no Grupo</a>
-
-    <h2>Redes</h2>
-    <p><a href="https://www.instagram.com/mocidadeccb2025">Instagram</a></p>
-    <p><a href="https://whatsapp.com/channel/0029Vaxg8ugEgGfSS0kGCw3O">Canal no WhatsApp</a></p>
-    <p><a href="https://whatsapp.com/channel/0029Vb2ArH7GZNClTJcfDw1N">Hinos</a></p>
-
-    <!-- === CAPTCHA simples === -->
-    <div class="captcha-container">
-      <p>Marque a caixinha para continuar:</p>
-      <label>
-        <input type="checkbox" id="captchaCheck"> Não sou um robô
-      </label>
-      <br><br>
-      <button id="submitBtn" disabled>Enviar</button>
-      <p id="message">Marque a caixinha antes de enviar!</p>
+    <div class="rules">
+      <p>🚫 Proibido entrar com intenções de relacionamento.</p>
+      <p>🚫 Mensagens anônimas não são permitidas neste grupo.</p>
+      <p>🚫 Sem vendas, anúncios, brigas, discussões ou palavras ofensivas.</p>
     </div>
 
-    <!-- JavaScript do CAPTCHA -->
-    <script>
+    <hr>
+
+    <!-- CAPTCHA protegido -->
+    <div class="captcha-box">
+      <h3>Proteção de Acesso</h3>
+      <p>Marque a caixinha para liberar os links do grupo e das redes:</p>
+      <label style="cursor:pointer">
+        <input type="checkbox" id="captchaCheck"> <strong>Não sou um robô</strong>
+      </label>
+      <br><br>
+      <button id="verifyBtn" class="link-btn" disabled>Verificar</button>
+      <p id="msg">Marque a caixa antes de verificar.</p>
+    </div>
+
+    <h2>Links</h2>
+    <div class="links">
+      <!-- Botões — começam desativados até verificar -->
+      <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
+      <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
+      <button id="openChannelBtn" class="link-btn" disabled>Canal (WhatsApp)</button>
+      <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
+    </div>
+
+    <hr>
+
+    <h2>Informações adicionais</h2>
+    <p>Se quiser, peça pra eu proteger também formulários ou gerar links temporários.</p>
+
+    <footer>© Grupo de Mocidade CCB</footer>
+  </div>
+
+  <script>
+    // ============================
+    // Base64 dos links (mantidos só aqui)
+    // Substitua se quiser por outros links: é só trocar a string Base64.
+    // ============================
+    const encodedLinks = {
+      group:  'aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9Ja3pLcmZjY0tpY0Zkb2d5bVQ5UkdGP21vZGU9d3d0',
+      insta:  'aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb2NpZGFkZWNjYjIwMjU=',
+      channel:'aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmF4Zzh1Z0VnR2ZTUzBrR0N3M08=',
+      hinos:  'aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmIyQXJIN0daTkNsVEpjZkR3MU4='
+    };
+
+    // pega elementos
     const check = document.getElementById('captchaCheck');
-    const btn = document.getElementById('submitBtn');
-    const msg = document.getElementById('message');
+    const verifyBtn = document.getElementById('verifyBtn');
+    const msg = document.getElementById('msg');
 
+    const openGroupBtn = document.getElementById('openGroupBtn');
+    const openInstaBtn = document.getElementById('openInstaBtn');
+    const openChannelBtn = document.getElementById('openChannelBtn');
+    const openHinosBtn = document.getElementById('openHinosBtn');
+
+    // habilita botões quando checkbox marcado
     check.addEventListener('change', () => {
-      btn.disabled = !check.checked;
-      msg.style.display = 'none';
+      const ok = check.checked;
+      verifyBtn.disabled = !ok;
+      msg.textContent = ok ? 'Pronto — clique em Verificar.' : 'Marque a caixa antes de verificar.';
     });
 
-    btn.addEventListener('click', () => {
-      if (!check.checked) {
-        msg.style.display = 'block';
-      } else {
-        alert('Formulário enviado com sucesso! ✅');
-        // Aqui você pode colocar a ação do botão, tipo redirecionar ou enviar dados
+    // "Verificar" simula checagem e ativa os botões reais
+    verifyBtn.addEventListener('click', () => {
+      if (!check.checked) { msg.textContent = 'Marque a caixa primeiro.'; return; }
+      msg.textContent = 'Captcha verificado! Os links foram liberados.';
+      // ativa botões que abrirão os links decodificados
+      [openGroupBtn, openInstaBtn, openChannelBtn, openHinosBtn].forEach(b => {
+        b.disabled = false;
+        b.setAttribute('aria-disabled','false');
+      });
+      // opcional: foco no primeiro botão
+      openGroupBtn.focus();
+    });
+
+    // função utilitária para decodificar Base64 com segurança
+    function decodeBase64(s){
+      try {
+        return atob(s);
+      } catch(e){
+        console.error('Erro ao decodificar Base64:', e);
+        return null;
       }
+    }
+
+    // abre link em nova aba (se estiver liberado)
+    function tryOpen(encoded){
+      if (!check.checked) { msg.textContent = 'Marque a caixa antes.'; return; }
+      const url = decodeBase64(encoded);
+      if (!url) { alert('Erro ao abrir o link.'); return; }
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    openGroupBtn.addEventListener('click', () => tryOpen(encodedLinks.group));
+    openInstaBtn.addEventListener('click', () => tryOpen(encodedLinks.insta));
+    openChannelBtn.addEventListener('click', () => tryOpen(encodedLinks.channel));
+    openHinosBtn.addEventListener('click', () => tryOpen(encodedLinks.hinos));
+
+    // segurança extra: remove hrefs que possam existir no HTML e contenham chat.whatsapp
+    // (caso você tenha anchors noutro ponto do template)
+    document.querySelectorAll('a[href]').forEach(a => {
+      try {
+        if (a.href && (a.href.includes('chat.whatsapp.com') || a.href.includes('whatsapp.com/channel'))) {
+          a.removeAttribute('href');
+          a.style.pointerEvents = 'none';
+        }
+      } catch(e){}
     });
-    </script>
 
-    <!-- CSS do CAPTCHA adaptado -->
-    <style>
-    .captcha-container {
-      border: 2px solid #fff;
-      padding: 20px;
-      width: 300px;
-      border-radius: 15px;
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      margin: 30px auto;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    }
-
-    .captcha-container p {
-      margin: 10px 0;
-      font-size: 1em;
-    }
-
-    #submitBtn {
-      padding: 8px 20px;
-      border-radius: 8px;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    #submitBtn:disabled {
-      background-color: #777;
-      cursor: not-allowed;
-    }
-
-    #message {
-      color: #ff5555;
-      display: none;
-      font-size: 0.9em;
-      margin-top: 10px;
-    }
-    </style>
+    // Observação importante (não bloqueante):
+    // Esta proteção é baseada em JavaScript no front-end — quem souber inspecionar o código pode decodificar as strings Base64.
+    // Para proteção completa, você precisaria validar no servidor (Opção B).
+  </script>
 </body>
-        </html>
+    </html>
