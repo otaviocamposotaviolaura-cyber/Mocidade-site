@@ -1,144 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grupo de Mocidade CCB</title>
-<style>
-  body {
-    margin: 0;
-    padding: 24px;
-    font-family: 'Poppins', Arial, sans-serif;
-    background: url('https://images.pexels.com/photos/164839/pexels-photo-164839.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    position: relative;
-    color: #fff;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo de Mocidade CCB</title>
 
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.3);
-    z-index: 0;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 50px auto;
-    background: rgba(0,0,0,0.4);
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    position: relative;
-    z-index: 1;
-  }
-
-  h1 { margin-top: 0; }
-  a { color: #7cc7ff; text-decoration: underline; }
-
-  .rules p { margin: 6px 0; }
-
-  .captcha-container {
-    margin: 20px 0;
-    padding: 18px;
-    background: rgba(0,0,0,0.5);
-    border-radius: 12px;
-    text-align: center;
-  }
-
-  #submitBtn, .link-btn {
-    padding: 10px 16px;
-    margin: 5px;
-    border: none;
-    border-radius: 8px;
-    background-color: #1e90ff;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  #submitBtn:disabled, .link-btn:disabled {
-    background-color: #444;
-    cursor: not-allowed;
-  }
-
-  #message { color: #ffd27a; margin-top: 10px; font-size: 0.95rem; }
-
-  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-</style>
+    <!-- Arquivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="container">
-  <h1>Bem-vindo ao Grupo de Mocidade</h1>
-  <p>📖 Bem-vindo(a)! 🙌</p>
-  <p>✨ Apresentação em oração é indispensável. Compartilhe sobre você quando quiser.</p>
 
-  <h2>Regras</h2>
-  <div class="rules">
+    <h1>Bem-vindo ao Grupo de Mocidade</h1>
+    <p>📖 Bem-vindo(a)! 🙌</p>
+    <p>✨ Aqui a única coisa indispensável é apresentar todos em oração. Vamos sempre lembrar uns dos outros diante de Deus!</p>
+    <p>🤲 A apresentação é opcional, sinta-se à vontade para compartilhar sobre você quando quiser.</p>
+
+    <h2>Regras</h2>
     <p>🚫 Proibido entrar com intenções de relacionamento.</p>
-    <p>🚫 Mensagens anônimas não são permitidas.</p>
-    <p>🚫 Sem vendas, anúncios ou brigas.</p>
-  </div>
+    <p>🚫 Mensagens anônimas não são permitidas neste grupo.</p>
+    <p>🚫 Sem vendas, anúncios, brigas, discussões ou palavras ofensivas.</p>
 
-  <h2>Proteção de Acesso</h2>
-  <div class="captcha-container">
-    <p>Marque a caixinha para liberar os links:</p>
-    <label><input type="checkbox" id="captchaCheck"> Não sou um robô</label>
-    <br><br>
-    <button id="submitBtn" disabled>Verificar</button>
-    <p id="message">Marque a caixa antes de verificar.</p>
-  </div>
+    <h2>Link do Grupo</h2>
+    <a href="https://chat.whatsapp.com/IkzKrfccKicFdogymT9RGF?mode=wwt">Entrar no Grupo</a>
 
-  <h2>Links</h2>
-  <div class="links">
-    <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
-    <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
-    <button id="openChannelBtn" class="link-btn" disabled>Canal WhatsApp</button>
-    <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
-  </div>
-</div>
+    <h2>Redes</h2>
+    <p><a href="https://www.instagram.com/mocidadeccb2025">Instagram</a></p>
+    <p><a href="https://whatsapp.com/channel/0029Vaxg8ugEgGfSS0kGCw3O">Canal no WhatsApp</a></p>
+    <p><a href="https://whatsapp.com/channel/0029Vb2ArH7GZNClTJcfDw1N">Hinos</a></p>
 
-<script>
-const check = document.getElementById('captchaCheck');
-const submitBtn = document.getElementById('submitBtn');
-const message = document.getElementById('message');
+    <!-- CAPTCHA -->
+    <div class="captcha-container">
+        <p>Marque a caixinha para continuar:</p>
 
-const openGroupBtn = document.getElementById('openGroupBtn');
-const openInstaBtn = document.getElementById('openInstaBtn');
-const openChannelBtn = document.getElementById('openChannelBtn');
-const openHinosBtn = document.getElementById('openHinosBtn');
+        <label>
+            <input type="checkbox" id="captchaCheck"> Não sou um robô
+        </label>
 
-// Links codificados em Base64
-const encodedLinks = {
-  group:  "aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9Ja3pLcmZjY0tpY0Zkb2d5bVQ5UkdGP21vZGU9d3d0",
-  insta:  "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb2NpZGFkZWNjYjIwMjU=",
-  channel:"aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmF4Zzh1Z0VnR2ZTUzBrR0N3M08=",
-  hinos:  "aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmIyQXJIN0daTkNsVEpjZkR3MU4="
-};
+        <br><br>
 
-check.addEventListener('change', ()=>{
-  submitBtn.disabled = !check.checked;
-  message.textContent = check.checked ? "Pronto — clique em Verificar." : "Marque a caixa antes de verificar.";
-});
+        <button id="submitBtn" disabled>Enviar</button>
 
-submitBtn.addEventListener('click', ()=>{
-  if(!check.checked){ message.textContent="Marque a caixa primeiro."; return; }
-  message.textContent="Captcha verificado! Links liberados.";
-  [openGroupBtn, openInstaBtn, openChannelBtn, openHinosBtn].forEach(b=>b.disabled=false);
-});
+        <p id="message" style="display:none;">Marque a caixinha antes de enviar!</p>
+    </div>
 
-function tryOpen(encoded){
-  if(!check.checked){ message.textContent="Marque a caixa antes."; return; }
-  const url = atob(encoded);
-  window.open(url,'_blank','noopener,noreferrer');
-}
+    <!-- JAVASCRIPT DO CAPTCHA -->
+    <script>
+        const check = document.getElementById("captchaCheck");
+        const btn = document.getElementById("submitBtn");
+        const msg = document.getElementById("message");
 
-openGroupBtn.addEventListener('click', ()=>tryOpen(encodedLinks.group));
-openInstaBtn.addEventListener('click', ()=>tryOpen(encodedLinks.insta));
-openChannelBtn.addEventListener('click', ()=>tryOpen(encodedLinks.channel));
-openHinosBtn.addEventListener('click', ()=>tryOpen(encodedLinks.hinos));
-</script>
+        check.addEventListener("change", () => {
+            btn.disabled = !check.checked;
+            msg.style.display = "none";
+        });
+
+        btn.addEventListener("click", () => {
+            if (!check.checked) {
+                msg.style.display = "block";
+            } else {
+                alert("Formulário enviado com sucesso! ✅");
+            }
+        });
+    </script>
+
 </body>
   </html>
