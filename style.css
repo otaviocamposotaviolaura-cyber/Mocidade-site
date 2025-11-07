@@ -1,83 +1,123 @@
-/* ===== Fundo ===== */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", Arial, sans-serif;
-    color: #fff;
-    text-align: center;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Grupo de Mocidade CCB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="overlay"></div>
 
-    background: url("https://cdn.pixabay.com/photo/2015/03/26/09/54/music-690301_1280.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+  <header class="top">
+    <h1>Bem-vindo ao Grupo de Mocidade 🎻</h1>
+    <p>Apresente-se em oração quando quiser — seja bem-vindo!</p>
+  </header>
 
-    /* escurece só um pouco para dar contraste */
-    background-color: rgba(0, 0, 0, 0.45);
-    background-blend-mode: darken;
-}
+  <main class="conteudo">
+    <section class="card captcha-card">
+      <h2>Proteção de Acesso</h2>
+      <p>Marque a caixinha para liberar os links.</p>
 
-/* ===== Títulos ===== */
-h1, h2 {
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
-    margin-top: 30px;
-}
+      <label class="checkbox-label">
+        <input type="checkbox" id="captchaCheck"> <span>Não sou um robô</span>
+      </label>
 
-p, a {
-    font-size: 1.1em;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
-}
+      <div class="actions">
+        <button id="verifyBtn" class="btn" disabled>Verificar</button>
+        <span id="status" class="status"></span>
+      </div>
 
-/* ===== Links ===== */
-a {
-    color: #ffd35c;
-    font-weight: bold;
-    text-decoration: none;
-}
+      <p id="msg" class="msg"></p>
+    </section>
 
-a:hover {
-    color: #fff;
-    text-decoration: underline;
-}
+    <section class="card links-card">
+      <h2>Links</h2>
+      <div class="links">
+        <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
+        <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
+        <button id="openChannelBtn" class="link-btn" disabled>Canal WhatsApp</button>
+        <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
+      </div>
+    </section>
 
-/* ===== Caixa do CAPTCHA ===== */
-.captcha-container {
-    margin: 40px auto;
-    padding: 25px;
-    width: 330px;
+    <section class="card info-card">
+      <h2>Regras Rápidas</h2>
+      <ul>
+        <li>Proibido entrar com intenções de relacionamento.</li>
+        <li>Sem vendas, anúncios, ofensas ou brigas.</li>
+        <li>Apresentação em oração é recomendada.</li>
+      </ul>
+    </section>
+  </main>
 
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 15px;
-    border: 2px solid #ffffffaa;
+  <footer class="bottom">
+    <p>© Grupo de Mocidade CCB</p>
+  </footer>
 
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-}
+<script>
+/* Links codificados em Base64 (mantidos apenas no JS) */
+const encodedLinks = {
+  group:  "aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9Ja3pLcmZjY0tpY0Zkb2d5bVQ5UkdGP21vZGU9d3d0",
+  insta:  "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb2NpZGFkZWNjYjIwMjU=",
+  channel:"aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmF4Zzh1Z0VnR2ZTUzBrR0N3M08=",
+  hinos:  "aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmIyQXJIN0daTkNsVEpjZkR3MU4="
+};
 
-/* Botão */
-#submitBtn {
-    padding: 10px 25px;
-    border-radius: 8px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
+/* Elementos */
+const captchaCheck = document.getElementById('captchaCheck');
+const verifyBtn = document.getElementById('verifyBtn');
+const status = document.getElementById('status');
+const msg = document.getElementById('msg');
 
-#submitBtn:hover:enabled {
-    transform: scale(1.05);
-}
+const openGroupBtn = document.getElementById('openGroupBtn');
+const openInstaBtn = document.getElementById('openInstaBtn');
+const openChannelBtn = document.getElementById('openChannelBtn');
+const openHinosBtn = document.getElementById('openHinosBtn');
 
-#submitBtn:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-}
+/* Habilita botão Verificar com checkbox */
+captchaCheck.addEventListener('change', () => {
+  verifyBtn.disabled = !captchaCheck.checked;
+  status.textContent = captchaCheck.checked ? 'Pronto' : '';
+  msg.textContent = '';
+});
 
-/* Mensagem de erro */
-#message {
-    margin-top: 10px;
-    color: #ff8585;
-    font-size: 0.9em;
+/* Simula verificação e libera os botões */
+verifyBtn.addEventListener('click', () => {
+  if(!captchaCheck.checked){
+    status.textContent = '';
+    msg.textContent = 'Marque a caixa antes de verificar.';
+    return;
   }
+  status.textContent = 'Verificando...';
+  verifyBtn.disabled = true;
+  setTimeout(() => {
+    status.textContent = 'Verificado ✅';
+    msg.textContent = 'Links liberados. Clique para abrir.';
+    [openGroupBtn, openInstaBtn, openChannelBtn, openHinosBtn].forEach(b => b.disabled = false);
+  }, 600);
+});
+
+/* Função utilitária */
+function decodeAndOpen(encoded){
+  if(!captchaCheck.checked){
+    msg.textContent = 'Marque o captcha antes.';
+    return;
+  }
+  try {
+    const url = atob(encoded);
+    window.open(url, '_blank', 'noopener,noreferrer');
+  } catch(e){
+    console.error('Erro ao abrir link:', e);
+    alert('Erro ao abrir o link. Veja console.');
+  }
+}
+
+/* Eventos dos botões */
+openGroupBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.group));
+openInstaBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.insta));
+openChannelBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.channel));
+openHinosBtn.addEventListener('click', ()=> decodeAndOpen(encodedLinks.hinos));
+</script>
+</body>
+</html>
