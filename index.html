@@ -6,7 +6,6 @@
 <title>Grupo de Mocidade CCB</title>
 
 <style>
-  /* ---------- Layout geral (fundo preto) ---------- */
   :root{
     --accent:#1e90ff;
     --card-bg: rgba(255,255,255,0.03);
@@ -14,7 +13,11 @@
     --text:#ffffff;
     --muted:#cfd8e3a3;
   }
-  html,body{height:100%;margin:0;padding:0;font-family: "Poppins", Arial, sans-serif;background:#000;color:var(--text);}
+  html,body{
+    height:100%;margin:0;padding:0;
+    font-family: "Poppins", Arial, sans-serif;
+    background:#000;color:var(--text);
+  }
 
   .wrap{
     max-width: 980px;
@@ -26,10 +29,12 @@
     text-align:center;
     margin-bottom: 8px;
   }
-  h1{margin:10px 0 4px 0;font-size:2rem;color:var(--accent);}
+  h1{
+    margin:10px 0 4px 0;
+    font-size:2rem;color:var(--accent);
+  }
   p.lead{margin:0 0 14px 0;color:#e6eefc;}
 
-  /* ---------- Card principal ---------- */
   .container{
     background: var(--card-bg);
     border-radius: 12px;
@@ -45,7 +50,6 @@
   .rules p{margin:6px 0;color:#e9f2ff;}
   hr{border:none;border-top:1px solid rgba(255,255,255,0.04);margin:18px 0;}
 
-  /* ---------- CAPTCHA panel ---------- */
   .captcha-box{
     max-width:420px;
     margin: 14px auto;
@@ -56,25 +60,27 @@
     border: 1px solid rgba(255,255,255,0.04);
   }
 
-  .checkbox-row{display:flex;align-items:center;gap:10px;justify-content:center;font-weight:700;}
+  .checkbox-row{
+    display:flex;align-items:center;gap:10px;
+    justify-content:center;font-weight:700;
+  }
   .checkbox-row input{transform:scale(1.15);}
 
   #verifyBtn{
-    margin-top:12px;
-    padding:10px 18px;
-    border-radius:10px;
-    border:none;
-    background:var(--accent);
-    color:white;
-    font-weight:800;
-    cursor:pointer;
+    margin-top:12px;padding:10px 18px;border-radius:10px;
+    border:none;background:var(--accent);
+    color:white;font-weight:800;cursor:pointer;
   }
-  #verifyBtn:disabled{background:#444;cursor:not-allowed;opacity:0.85;}
+  #verifyBtn:disabled{
+    background:#444;cursor:not-allowed;opacity:0.85;
+  }
 
   #msg{margin-top:10px;color:#ffd27a;font-weight:600;}
 
-  /* ---------- Links ---------- */
-  .links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+  .links{
+    display:flex;gap:12px;flex-wrap:wrap;
+    justify-content:center;margin-top:12px;
+  }
   .link-btn{
     background:transparent;
     border:2px solid var(--accent);
@@ -85,14 +91,23 @@
     font-weight:700;
     min-width:150px;
   }
-  .link-btn:disabled{opacity:0.45;border-color:#555;color:#999;cursor:not-allowed;}
+  .link-btn:disabled{
+    opacity:0.45;border-color:#555;color:#999;
+    cursor:not-allowed;
+  }
 
-  /* ---------- Info card ---------- */
-  .info-card{margin-top:18px;padding:14px;border-radius:10px;background:var(--panel-bg);color:var(--muted);}
+  .info-card{
+    margin-top:18px;padding:14px;
+    border-radius:10px;
+    background:var(--panel-bg);
+    color:var(--muted);
+  }
 
-  footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.9rem;}
+  footer{
+    margin-top:20px;text-align:center;
+    color:var(--muted);font-size:0.9rem;
+  }
 
-  /* responsive */
   @media (max-width:520px){
     .link-btn{min-width:unset;width:100%;}
     .captcha-box{width:92%;}
@@ -101,67 +116,99 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Bem-vindo ao Grupo de Mocidade</h1>
-      <p class="lead">📖 Apresente-se em oração quando quiser — vamos lembrar uns dos outros!</p>
-    </header>
+<div class="wrap">
 
-    <main class="container">
-      <section class="intro">
-        <p>✨ Aqui a única coisa indispensável é a apresentação em oração. Sinta-se à vontade para compartilhar sobre você quando quiser.</p>
-      </section>
+  <header>
+    <h1>Bem-vindo ao Grupo de Mocidade</h1>
+    <p class="lead">📖 Apresente-se em oração quando quiser — vamos lembrar uns dos outros!</p>
+  </header>
 
-      <hr>
+  <main class="container">
 
-      <section class="captcha-box" aria-labelledby="cap-title">
-        <h2 id="cap-title">Proteção de Acesso</h2>
-        <p>Marque a caixinha e clique em Verificar para liberar os links.</p>
+    <section class="intro">
+      <p>✨ Aqui a única coisa indispensável é a apresentação em oração. Sinta-se à vontade para compartilhar sobre você quando quiser.</p>
+    </section>
 
-        <div class="checkbox-row" style="margin-top:8px;">
-          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
-            <input type="checkbox" id="captchaCheck" aria-label="Não sou um robô">
-            <span>Não sou um robô</span>
-          </label>
-        </div>
+    <!-- ✅ Versículo do Dia -->
+    <div id="versiculo-dia" style="padding: 20px; background: #111; border-radius: 10px; margin: 20px 0; border:1px solid rgba(255,255,255,0.06);">
+      <h2>📖 Versículo do Dia</h2>
+      <p id="versiculo-texto" style="font-size: 18px; color:#e6eefc;"></p>
+    </div>
 
-        <button id="verifyBtn" disabled>Verificar</button>
-        <div id="msg" role="status">Marque a caixa antes de verificar.</div>
-      </section>
+    <hr>
 
-      <section class="links-card" style="margin-top:14px;">
-        <h2>Links</h2>
-        <div class="links" role="navigation" aria-label="Links do grupo">
-          <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
-          <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
-          <button id="openChannelBtn" class="link-btn" disabled>Canal WhatsApp</button>
-          <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
-        </div>
-      </section>
+    <!-- ✅ CAPTCHA -->
+    <section class="captcha-box" aria-labelledby="cap-title">
+      <h2 id="cap-title">Proteção de Acesso</h2>
+      <p>Marque a caixinha e clique em Verificar para liberar os links.</p>
 
-      <hr>
+      <div class="checkbox-row" style="margin-top:8px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+          <input type="checkbox" id="captchaCheck" aria-label="Não sou um robô">
+          <span>Não sou um robô</span>
+        </label>
+      </div>
 
-      <section class="info-card">
-        <h2>Regras Rápidas</h2>
-        <ul>
-          <li>Proibido entrar com intenções de relacionamento.</li>
-          <li>Sem vendas, anúncios, ofensas ou brigas.</li>
-          <li>Apresente-se em oração quando possível.</li>
-        </ul>
-      </section>
-    </main>
+      <button id="verifyBtn" disabled>Verificar</button>
+      <div id="msg" role="status">Marque a caixa antes de verificar.</div>
+    </section>
 
-    <footer>
-      <p>© Grupo de Mocidade CCB</p>
-    </footer>
-  </div>
+    <!-- ✅ LINKS -->
+    <section class="links-card" style="margin-top:14px;">
+      <h2>Links</h2>
+      <div class="links" role="navigation" aria-label="Links do grupo">
+        <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
+        <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
+        <button id="openChannelBtn" class="link-btn" disabled>Canal WhatsApp</button>
+        <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
+      </div>
+    </section>
 
+    <hr>
+
+    <!-- ✅ REGRAS -->
+    <section class="info-card">
+      <h2>Regras Rápidas</h2>
+      <ul>
+        <li>Proibido entrar com intenções de relacionamento.</li>
+        <li>Sem vendas, anúncios, ofensas ou brigas.</li>
+        <li>Apresente-se em oração quando possível.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© Grupo de Mocidade CCB</p>
+  </footer>
+
+</div>
+
+<!-- ✅ SCRIPTS -->
 <script>
-/* ------------------------------
-   Código JS: captcha + abrir links
-   ------------------------------ */
+// Versículos do dia
+const versiculos = [
+    "Salmos 4:8 — Em paz me deito e logo pego no sono, porque só Tu, Senhor, me fazes repousar seguro.",
+    "Isaías 41:10 — Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.",
+    "Filipenses 4:13 — Tudo posso naquele que me fortalece.",
+    "Salmos 23:1 — O Senhor é o meu pastor; nada me faltará.",
+    "Josué 1:9 — Esforça-te e tem bom ânimo, porque o Senhor teu Deus é contigo.",
+    "Salmos 91:7 — Mil cairão ao teu lado e dez mil à tua direita, mas tu não serás atingido.",
+    "Provérbios 3:5 — Confia no Senhor de todo o teu coração.",
+    "Romanos 8:31 — Se Deus é por nós, quem será contra nós?",
+    "Salmos 37:5 — Entrega o teu caminho ao Senhor; confia n’Ele, e Ele tudo fará.",
+    "Mateus 5:14 — Vós sois a luz do mundo."
+];
 
-/* Links codificados em Base64 (mantidos somente aqui) */
+function atualizarVersiculo() {
+    const hoje = new Date();
+    const indice = hoje.getDate() % versiculos.length;
+    document.getElementById("versiculo-texto").innerText = versiculos[indice];
+}
+atualizarVersiculo();
+
+
+// CAPTCHA + links
 const encodedLinks = {
   group:  "aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9Ja3pLcmZjY0tpY0Zkb2d5bVQ5UkdGP21vZGU9d3d0",
   insta:  "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb2NpZGFkZWNjYjIwMjU=",
@@ -178,19 +225,16 @@ const openInstaBtn = document.getElementById('openInstaBtn');
 const openChannelBtn = document.getElementById('openChannelBtn');
 const openHinosBtn = document.getElementById('openHinosBtn');
 
-/* 1) ativar botão Verificar quando checkbox marcado */
 captchaCheck.addEventListener('change', () => {
   verifyBtn.disabled = !captchaCheck.checked;
   msg.textContent = captchaCheck.checked ? 'Pronto — clique em Verificar.' : 'Marque a caixa antes de verificar.';
 });
 
-/* 2) clicar em Verificar: libera botões (simula validação) */
 verifyBtn.addEventListener('click', () => {
   if (!captchaCheck.checked) {
     msg.textContent = 'Marque a caixa primeiro.';
     return;
   }
-  // feedback simples
   verifyBtn.disabled = true;
   msg.textContent = 'Verificando...';
   setTimeout(() => {
@@ -198,15 +242,13 @@ verifyBtn.addEventListener('click', () => {
     [openGroupBtn, openInstaBtn, openChannelBtn, openHinosBtn].forEach(b => b.disabled = false);
     verifyBtn.disabled = false;
     openGroupBtn.focus();
-  }, 600);
+  }, 700);
 });
 
-/* utilitário para decodificar Base64 em URL */
 function decodeBase64(s){
   try { return atob(s); } catch(e){ console.error('Erro base64:', e); return null; }
 }
 
-/* abre link só se captcha estiver verificado (checkbox marcado) */
 function tryOpen(encoded){
   if (!captchaCheck.checked) {
     msg.textContent = 'Marque a caixa antes.';
@@ -217,11 +259,11 @@ function tryOpen(encoded){
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-/* eventos dos botões */
 openGroupBtn.addEventListener('click', ()=> tryOpen(encodedLinks.group));
 openInstaBtn.addEventListener('click', ()=> tryOpen(encodedLinks.insta));
 openChannelBtn.addEventListener('click', ()=> tryOpen(encodedLinks.channel));
 openHinosBtn.addEventListener('click', ()=> tryOpen(encodedLinks.hinos));
 </script>
+
 </body>
   </html>
