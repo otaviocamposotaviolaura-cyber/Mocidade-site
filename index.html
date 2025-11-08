@@ -1,184 +1,227 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grupo de Mocidade CCB</title>
 
 <style>
-  body {
-    font-family: 'Poppins', Arial, sans-serif;
-    margin: 0;
-    padding: 24px;
-    background-color: #0a46a3; /* Fundo azul sólido */
-    color: #fff;
-    text-align: center;
+  /* ---------- Layout geral (fundo preto) ---------- */
+  :root{
+    --accent:#1e90ff;
+    --card-bg: rgba(255,255,255,0.03);
+    --panel-bg: rgba(255,255,255,0.04);
+    --text:#ffffff;
+    --muted:#cfd8e3a3;
+  }
+  html,body{height:100%;margin:0;padding:0;font-family: "Poppins", Arial, sans-serif;background:#000;color:var(--text);}
+
+  .wrap{
+    max-width: 980px;
+    margin: 28px auto;
+    padding: 20px;
   }
 
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: rgba(255,255,255,0.05);
-    padding: 24px;
+  header{
+    text-align:center;
+    margin-bottom: 8px;
+  }
+  h1{margin:10px 0 4px 0;font-size:2rem;color:var(--accent);}
+  p.lead{margin:0 0 14px 0;color:#e6eefc;}
+
+  /* ---------- Card principal ---------- */
+  .container{
+    background: var(--card-bg);
     border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.03);
   }
 
-  h1 { font-size: 2rem; margin-top: 0; }
-  a { color: #7cc7ff; text-decoration: underline; }
+  h2{margin: 12px 0 8px 0;color:#fff;}
+  a{color:var(--accent);text-decoration:none;font-weight:600;}
+  a:hover{text-decoration:underline;}
 
-  .rules p { margin: 6px 0; }
+  .rules p{margin:6px 0;color:#e9f2ff;}
+  hr{border:none;border-top:1px solid rgba(255,255,255,0.04);margin:18px 0;}
 
-  .links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-    justify-content: center;
-  }
-
-  .link-btn {
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: none;
-    background: #1e90ff;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  .link-btn[disabled] {
-    background: #444;
-    cursor: not-allowed;
-    opacity: 0.9;
-  }
-
-  .captcha-box {
-    max-width: 360px;
-    margin: 20px auto;
+  /* ---------- CAPTCHA panel ---------- */
+  .captcha-box{
+    max-width:420px;
+    margin: 14px auto;
+    background: rgba(0,0,0,0.45);
     padding: 18px;
     border-radius: 12px;
-    background: rgba(0,0,0,0.4);
-    text-align: center;
+    text-align:center;
+    border: 1px solid rgba(255,255,255,0.04);
   }
 
-  #msg {
-    color: #ffd27a;
-    margin-top: 10px;
-    font-size: 0.95rem;
-  }
+  .checkbox-row{display:flex;align-items:center;gap:10px;justify-content:center;font-weight:700;}
+  .checkbox-row input{transform:scale(1.15);}
 
-  footer {
-    margin-top: 18px;
-    font-size: 0.9rem;
-    color: #cfd8e3a3;
+  #verifyBtn{
+    margin-top:12px;
+    padding:10px 18px;
+    border-radius:10px;
+    border:none;
+    background:var(--accent);
+    color:white;
+    font-weight:800;
+    cursor:pointer;
   }
+  #verifyBtn:disabled{background:#444;cursor:not-allowed;opacity:0.85;}
 
-  hr {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    margin: 16px 0;
+  #msg{margin-top:10px;color:#ffd27a;font-weight:600;}
+
+  /* ---------- Links ---------- */
+  .links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+  .link-btn{
+    background:transparent;
+    border:2px solid var(--accent);
+    color:var(--accent);
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    min-width:150px;
   }
+  .link-btn:disabled{opacity:0.45;border-color:#555;color:#999;cursor:not-allowed;}
 
-  @media (max-width: 480px) {
-    .links { flex-direction: column; }
+  /* ---------- Info card ---------- */
+  .info-card{margin-top:18px;padding:14px;border-radius:10px;background:var(--panel-bg);color:var(--muted);}
+
+  footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.9rem;}
+
+  /* responsive */
+  @media (max-width:520px){
+    .link-btn{min-width:unset;width:100%;}
+    .captcha-box{width:92%;}
   }
 </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <header>
+      <h1>Bem-vindo ao Grupo de Mocidade</h1>
+      <p class="lead">📖 Apresente-se em oração quando quiser — vamos lembrar uns dos outros!</p>
+    </header>
 
-<div class="container">
-  <h1>Bem-vindo ao Grupo de Mocidade</h1>
-  <p>📖 Bem-vindo(a)! 🙌</p>
-  <p>✨ Aqui a única coisa indispensável é apresentar todos em oração. Vamos sempre lembrar uns dos outros diante de Deus!</p>
-  <p>🤲 A apresentação é opcional, sinta-se à vontade para compartilhar sobre você quando quiser.</p>
+    <main class="container">
+      <section class="intro">
+        <p>✨ Aqui a única coisa indispensável é a apresentação em oração. Sinta-se à vontade para compartilhar sobre você quando quiser.</p>
+      </section>
 
-  <h2>Regras</h2>
-  <div class="rules">
-    <p>🚫 Proibido entrar com intenções de relacionamento.</p>
-    <p>🚫 Mensagens anônimas não são permitidas neste grupo.</p>
-    <p>🚫 Sem vendas, anúncios, brigas, discussões ou palavras ofensivas.</p>
+      <hr>
+
+      <section class="captcha-box" aria-labelledby="cap-title">
+        <h2 id="cap-title">Proteção de Acesso</h2>
+        <p>Marque a caixinha e clique em Verificar para liberar os links.</p>
+
+        <div class="checkbox-row" style="margin-top:8px;">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="captchaCheck" aria-label="Não sou um robô">
+            <span>Não sou um robô</span>
+          </label>
+        </div>
+
+        <button id="verifyBtn" disabled>Verificar</button>
+        <div id="msg" role="status">Marque a caixa antes de verificar.</div>
+      </section>
+
+      <section class="links-card" style="margin-top:14px;">
+        <h2>Links</h2>
+        <div class="links" role="navigation" aria-label="Links do grupo">
+          <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
+          <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
+          <button id="openChannelBtn" class="link-btn" disabled>Canal WhatsApp</button>
+          <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
+        </div>
+      </section>
+
+      <hr>
+
+      <section class="info-card">
+        <h2>Regras Rápidas</h2>
+        <ul>
+          <li>Proibido entrar com intenções de relacionamento.</li>
+          <li>Sem vendas, anúncios, ofensas ou brigas.</li>
+          <li>Apresente-se em oração quando possível.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>© Grupo de Mocidade CCB</p>
+    </footer>
   </div>
-
-  <hr>
-
-  <!-- CAPTCHA protegido -->
-  <div class="captcha-box">
-    <h3>Proteção de Acesso</h3>
-    <p>Marque a caixinha para liberar os links do grupo e das redes:</p>
-    <label style="cursor:pointer">
-      <input type="checkbox" id="captchaCheck"> <strong>Não sou um robô</strong>
-    </label>
-    <br><br>
-    <button id="verifyBtn" class="link-btn" disabled>Verificar</button>
-    <p id="msg">Marque a caixa antes de verificar.</p>
-  </div>
-
-  <h2>Links</h2>
-  <div class="links">
-    <button id="openGroupBtn" class="link-btn" disabled>Entrar no Grupo</button>
-    <button id="openInstaBtn" class="link-btn" disabled>Instagram</button>
-    <button id="openChannelBtn" class="link-btn" disabled>Canal (WhatsApp)</button>
-    <button id="openHinosBtn" class="link-btn" disabled>Hinos</button>
-  </div>
-
-  <hr>
-
-  <h2>Informações adicionais</h2>
-  <p>Se quiser, posso proteger links, formulários ou criar páginas extras.</p>
-
-  <footer>© Grupo de Mocidade CCB</footer>
-</div>
 
 <script>
-  // Base64 dos links
-  const encodedLinks = {
-    group:  'aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9Ja3pLcmZjY0tpY0Zkb2d5bVQ5UkdGP21vZGU9d3d0',
-    insta:  'aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb2NpZGFkZWNjYjIwMjU=',
-    channel:'aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmF4Zzh1Z0VnR2ZTUzBrR0N3M08=',
-    hinos:  'aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmIyQXJIN0daTkNsVEpjZkR3MU4='
-  };
+/* ------------------------------
+   Código JS: captcha + abrir links
+   ------------------------------ */
 
-  const check = document.getElementById('captchaCheck');
-  const verifyBtn = document.getElementById('verifyBtn');
-  const msg = document.getElementById('msg');
+/* Links codificados em Base64 (mantidos somente aqui) */
+const encodedLinks = {
+  group:  "aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9Ja3pLcmZjY0tpY0Zkb2d5bVQ5UkdGP21vZGU9d3d0",
+  insta:  "aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9tb2NpZGFkZWNjYjIwMjU=",
+  channel:"aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmF4Zzh1Z0VnR2ZTUzBrR0N3M08=",
+  hinos:  "aHR0cHM6Ly93aGF0c2FwcC5jb20vY2hhbm5lbC8wMDI5VmIyQXJIN0daTkNsVEpjZkR3MU4="
+};
 
-  const openGroupBtn = document.getElementById('openGroupBtn');
-  const openInstaBtn = document.getElementById('openInstaBtn');
-  const openChannelBtn = document.getElementById('openChannelBtn');
-  const openHinosBtn = document.getElementById('openHinosBtn');
+const captchaCheck = document.getElementById('captchaCheck');
+const verifyBtn = document.getElementById('verifyBtn');
+const msg = document.getElementById('msg');
 
-  check.addEventListener('change', () => {
-    const ok = check.checked;
-    verifyBtn.disabled = !ok;
-    msg.textContent = ok ? 'Pronto — clique em Verificar.' : 'Marque a caixa antes de verificar.';
-  });
+const openGroupBtn = document.getElementById('openGroupBtn');
+const openInstaBtn = document.getElementById('openInstaBtn');
+const openChannelBtn = document.getElementById('openChannelBtn');
+const openHinosBtn = document.getElementById('openHinosBtn');
 
-  verifyBtn.addEventListener('click', () => {
-    if (!check.checked) { msg.textContent = 'Marque a caixa primeiro.'; return; }
+/* 1) ativar botão Verificar quando checkbox marcado */
+captchaCheck.addEventListener('change', () => {
+  verifyBtn.disabled = !captchaCheck.checked;
+  msg.textContent = captchaCheck.checked ? 'Pronto — clique em Verificar.' : 'Marque a caixa antes de verificar.';
+});
+
+/* 2) clicar em Verificar: libera botões (simula validação) */
+verifyBtn.addEventListener('click', () => {
+  if (!captchaCheck.checked) {
+    msg.textContent = 'Marque a caixa primeiro.';
+    return;
+  }
+  // feedback simples
+  verifyBtn.disabled = true;
+  msg.textContent = 'Verificando...';
+  setTimeout(() => {
     msg.textContent = 'Captcha verificado! Links liberados.';
-    [openGroupBtn, openInstaBtn, openChannelBtn, openHinosBtn].forEach(b => {
-      b.disabled = false;
-    });
+    [openGroupBtn, openInstaBtn, openChannelBtn, openHinosBtn].forEach(b => b.disabled = false);
+    verifyBtn.disabled = false;
     openGroupBtn.focus();
-  });
+  }, 600);
+});
 
-  function decodeBase64(s){
-    try { return atob(s); } catch(e){ console.error('Erro ao decodificar Base64:', e); return null; }
+/* utilitário para decodificar Base64 em URL */
+function decodeBase64(s){
+  try { return atob(s); } catch(e){ console.error('Erro base64:', e); return null; }
+}
+
+/* abre link só se captcha estiver verificado (checkbox marcado) */
+function tryOpen(encoded){
+  if (!captchaCheck.checked) {
+    msg.textContent = 'Marque a caixa antes.';
+    return;
   }
+  const url = decodeBase64(encoded);
+  if (!url) { alert('Erro ao abrir o link.'); return; }
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
 
-  function tryOpen(encoded){
-    if (!check.checked) { msg.textContent = 'Marque a caixa antes.'; return; }
-    const url = decodeBase64(encoded);
-    if (!url) { alert('Erro ao abrir o link.'); return; }
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
-
-  openGroupBtn.addEventListener('click', () => tryOpen(encodedLinks.group));
-  openInstaBtn.addEventListener('click', () => tryOpen(encodedLinks.insta));
-  openChannelBtn.addEventListener('click', () => tryOpen(encodedLinks.channel));
-  openHinosBtn.addEventListener('click', () => tryOpen(encodedLinks.hinos));
+/* eventos dos botões */
+openGroupBtn.addEventListener('click', ()=> tryOpen(encodedLinks.group));
+openInstaBtn.addEventListener('click', ()=> tryOpen(encodedLinks.insta));
+openChannelBtn.addEventListener('click', ()=> tryOpen(encodedLinks.channel));
+openHinosBtn.addEventListener('click', ()=> tryOpen(encodedLinks.hinos));
 </script>
-
 </body>
-  </html>
+          </html>
